@@ -1,6 +1,15 @@
 ---
 title: "Example"
 author: "Emma Rand"
+format:
+  pdf:
+    documentclass: article
+    papersize: A4
+    mainfont: Calibri
+    geometry:
+      - top=20mm
+      - left=25mm
+      - right=25mm
 engine: knitr
 execute:
   echo: false
@@ -24,14 +33,16 @@ options(digits = 2)
 
 # Introduction
 
-A number of [subspecies of the common chaffinch, *Fringilla coelebs*](https://en.wikipedia.org/wiki/Common_chaffinch), have been described based principally on the differences in the pattern and colour of the adult male plumage [@suárez2009]. Two of groups of these subspecies are the "coelebs group" that occurs in Europe and Asia and the "canariensis group" that occurs on the Canary Islands (See @fig-subspecies)
+A number of [subspecies of the common chaffinch, *Fringilla coelebs*](https://en.wikipedia.org/wiki/Common_chaffinch), have been described based principally on the differences in the pattern and colour of the adult male plumage [@suárez2009]. Two of groups of these subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe and Asia and the "canariensis group" (@fig-canariensis) that occurs on the Canary Islands. 
 
 ::: {#fig-subspecies layout-ncol="2"}
+
 ![*F. c. coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
 
 ![*F. c. palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#fig-canariensis}
 
 Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons) and of the canariensis group on the right (H. Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons).
+
 :::
 
 This study sought to determine whether the two subspecies differ in mass.
@@ -102,37 +113,43 @@ ggplot(mapping = aes(x = mod$residuals)) +
 
 # Results
 
-`r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$: `r highest_mean` $\pm$ `r highest_se` g) have significantly higher mass than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ `r results$p.value[2]`). See @fig-chaff
+`r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$: `r highest_mean` $\pm$ `r highest_se` g) have significantly higher mass than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ = `r results$p.value[2]`). See @fig-chaff
 
+::: {#fig-chaff}
 ```{r}
-#| label: fig-chaff
-#| fig-cap: "Canariensis subspecies is heavier than Coelebs. Errors bars are means  ± 1 s.e."
-#| fig-width: 3.5
-#| fig-height: 3.5
-#| fig-align: left
+#| code-fold: true
 
 ggplot() +
   geom_point(data = chaff, aes(x = subspecies, y = mass),
              position = position_jitter(width = 0.1, height = 0),
              colour = "gray50") +
-  geom_errorbar(data = chaff_summary,
+  geom_errorbar(data = chaff_summary, 
                 aes(x = subspecies, ymin = mean - se, ymax = mean + se),
                 width = 0.3) +
-  geom_errorbar(data = chaff_summary,
+  geom_errorbar(data = chaff_summary, 
                 aes(x = subspecies, ymin = mean, ymax = mean),
                 width = 0.2) +
-  scale_y_continuous(name = "Mass (g)",
-                     limits = c(0, 30),
+  scale_y_continuous(name = "Mass (g)", 
+                     limits = c(0, 30), 
                      expand = c(0, 0)) +
-  scale_x_discrete(name = "Subspecies",
+  scale_x_discrete(name = "Subspecies", 
                    labels = c("Canariensis", "Coelebs")) +
-  annotate("segment", x = 1, xend = 2,
+  annotate("segment", x = 1, xend = 2, 
            y = 28, yend = 28,
            colour = "black") +
-  annotate("text", x = 1.5,  y = 29,
-           label = (expression(italic(p)~"= 0.012"))) +
+  annotate("text", x = 1.5,  y = 29, 
+           label = expression(italic(p)~"= 0.012")) +
   theme_classic()
 ```
+
+**Canariensis chaffinches are heavier than Coelebs chaffinches**. The
+mean mass of 20 randomly sampled males from each subspecies was
+determined. Error bars are $\pm$ 1 standard error. Canariensis
+chaffinches were significantly heavier than Coelebs
+($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; 
+$p$ = `r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
+tidyverse packages [@tidyverse].
+:::
 
 There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures.
 
