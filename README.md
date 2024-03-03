@@ -4,6 +4,7 @@
 [pdf Output](https://github.com/3mmaRand/chaffinch/blob/main/example.pdf)
 by adding to the YAML header
 
+```
 format:  
   pdf:  
     documentclass: article  
@@ -13,3 +14,4 @@ format:
       - top=20mm  
       - left=25mm  
       - right=25mm  
+```
