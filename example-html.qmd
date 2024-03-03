@@ -1,0 +1,183 @@
+---
+title: "Example"
+author: "Emma Rand"
+engine: knitr
+execute:
+  echo: false
+  include: true
+  error: false
+  message: false
+  warning: false
+bibliography: references.bib
+---
+
+```{r}
+#| label: packages
+#| include: false
+library(tidyverse)
+library(broom)
+```
+
+```{r}
+options(digits = 2)
+```
+
+# Introduction
+
+A number of [subspecies of the common chaffinch, *Fringilla coelebs*](https://en.wikipedia.org/wiki/Common_chaffinch), have been described based principally on the differences in the pattern and colour of the adult male plumage [@suárez2009]. Two of groups of these subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe and Asia and the "canariensis group" (@fig-canariensis) that occurs on the Canary Islands. 
+
+::: {#fig-subspecies layout-ncol="2"}
+
+![*F. c. coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
+
+![*F. c. palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#fig-canariensis}
+
+Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons) and of the canariensis group on the right (H. Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons).
+
+:::
+
+This study sought to determine whether the two subspecies differ in mass.
+
+# Methods
+
+```{r}
+#| label: data-import
+#| include: false
+file <- "data-raw/chaff.txt"
+chaff <- read_table(file)
+```
+
+```{r}
+#| label: data-summary
+chaff_summary <- chaff |> 
+  group_by(subspecies) |>  
+  summarise(mean = mean(mass, na.rm = TRUE),
+            sd = sd(mass, na.rm = TRUE),
+            n = length(mass),
+            se = sd / sqrt(n))
+```
+
+```{r}
+#| label: extract-summary
+# extract values for inline reporting
+
+# sample sizes
+n_coelebs <- chaff_summary$n[chaff_summary$subspecies == "coelebs"] 
+n_canariensis <- chaff_summary$n[chaff_summary$subspecies == "canariensis"] 
+
+# highest mean, se and the subspecies to which they belong
+highest_mean <- max(chaff_summary$mean) 
+highest_se <- chaff_summary$se[chaff_summary$mean == highest_mean] 
+highest_subspecies <- chaff_summary$subspecies[chaff_summary$mean == highest_mean]
+
+# lowest mean, se and the subspecies to which they belong
+lowest_mean <- min(chaff_summary$mean) 
+lowest_se <- chaff_summary$se[chaff_summary$mean == lowest_mean] 
+lowest_subspecies <- chaff_summary$subspecies[chaff_summary$mean == lowest_mean]
+```
+
+We randomly sampled `r n_coelebs` *F. c. coelebs* males and `r n_canariensis` *F. c. palmae* males and determined their mass with spring scales. Analysis was carried out with R version 4.3.1 [@R-core] and tidyverse [@tidyverse] packages.
+
+```{r}
+#| label: model
+# create a two-sample model and tidy result
+mod <- lm(data = chaff, mass ~ subspecies) 
+results <-  tidy(mod)
+
+```
+
+```{r}
+#| label: check-assumptions
+#| include: false
+plot(mod, which = 1)
+
+ggplot(mapping = aes(x = mod$residuals)) +
+  geom_histogram(bins = 10)
+
+# shapiro.test(mod$residuals)
+# Conclusion: examination consitent with residuals being ND
+# 
+# -   Variance is about the same for all values of x
+# -   Looks roughly normal, symmetrical and normality test is not significant
+
+```
+
+# Results
+
+`r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$: `r highest_mean` $\pm$ `r highest_se` g) have significantly higher mass than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ = `r results$p.value[2]`). See @fig-chaff
+
+::: {#fig-chaff}
+```{r}
+#| code-fold: true
+
+ggplot() +
+  geom_point(data = chaff, aes(x = subspecies, y = mass),
+             position = position_jitter(width = 0.1, height = 0),
+             colour = "gray50") +
+  geom_errorbar(data = chaff_summary, 
+                aes(x = subspecies, ymin = mean - se, ymax = mean + se),
+                width = 0.3) +
+  geom_errorbar(data = chaff_summary, 
+                aes(x = subspecies, ymin = mean, ymax = mean),
+                width = 0.2) +
+  scale_y_continuous(name = "Mass (g)", 
+                     limits = c(0, 30), 
+                     expand = c(0, 0)) +
+  scale_x_discrete(name = "Subspecies", 
+                   labels = c("Canariensis", "Coelebs")) +
+  annotate("segment", x = 1, xend = 2, 
+           y = 28, yend = 28,
+           colour = "black") +
+  annotate("text", x = 1.5,  y = 29, 
+           label = expression(italic(p)~"= 0.012")) +
+  theme_classic()
+```
+
+**Canariensis chaffinches are heavier than Coelebs chaffinches**. The
+mean mass of 20 randomly sampled males from each subspecies was
+determined. Error bars are $\pm$ 1 standard error. Canariensis
+chaffinches were significantly heavier than Coelebs
+($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; 
+$p$ = `r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
+tidyverse packages [@tidyverse].
+:::
+
+There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures.
+
+```{r}
+#| label: fig-chaff-dist
+#| fig-cap: "Unnecessary extra figure to demonstrate the autonumbering."
+#| fig-width: 3.5
+#| fig-height: 3.5
+#| fig-align: left
+ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
+  geom_density(alpha = 0.4) +
+    scale_y_continuous(name = "Density",
+                     limits = c(0, 0.2),
+                     expand = c(0, 0)) +
+  scale_x_continuous(name = "Mass (g)",
+                     limits = c(10, 30),
+                     expand = c(0, 0)) +
+  scale_fill_viridis_d(name = "Subspecies",
+                      labels = c("Canariensis", 
+                                 "Coelebs")) +
+  theme_classic()
+                   
+```
+
+These results are gratuitously reproduced in @tbl-chaff just to include a table.
+
+```{r}
+#| label: tbl-chaff
+chaff_summary |> 
+  mutate(subspecies = str_to_sentence(subspecies)) |> 
+  knitr::kable(caption = "Summary of mass(g) for the two subspecies of chaffinch.",
+               col.names = names(chaff_summary) |> str_to_sentence())
+
+```
+
+# Discussion
+
+Here we pick up points from the introduction.
+
+# References

@@ -1,7 +1,7 @@
 # chaffinch
-[html Output](https://3mmarand.github.io/chaffinch/example.html)
+[html Output](https://3mmarand.github.io/chaffinch/example-html.html)
 
-[pdf Output](https://github.com/3mmaRand/chaffinch/blob/main/example.pdf)
+[pdf Output](https://github.com/3mmaRand/chaffinch/blob/main/example-pdf.pdf)
 by adding to the YAML header
 
 ```
