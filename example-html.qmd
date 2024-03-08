@@ -8,6 +8,12 @@ execute:
   error: false
   message: false
   warning: false
+crossref:
+  custom:
+    - kind: float
+      key: suppfig
+      reference-prefix: Figure S
+      space-before-numbering: false
 bibliography: references.bib
 ---
 
@@ -142,7 +148,7 @@ $p$ = `r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
 tidyverse packages [@tidyverse].
 :::
 
-There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures.
+There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures. The same figure is in "Supplemental Figures". See @suppfig-chaff-dist2
 
 ```{r}
 #| label: fig-chaff-dist
@@ -165,6 +171,7 @@ ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
                    
 ```
 
+
 These results are gratuitously reproduced in @tbl-chaff just to include a table.
 
 ```{r}
@@ -180,4 +187,28 @@ chaff_summary |>
 
 Here we pick up points from the introduction.
 
+# Supplemental Figures
+
+::: {#suppfig-chaff-dist2}
+
+
+```{r}
+ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
+  geom_density(alpha = 0.4) +
+    scale_y_continuous(name = "Density",
+                     limits = c(0, 0.2),
+                     expand = c(0, 0)) +
+  scale_x_continuous(name = "Mass (g)",
+                     limits = c(10, 30),
+                     expand = c(0, 0)) +
+  scale_fill_viridis_d(name = "Subspecies",
+                      labels = c("Canariensis", 
+                                 "Coelebs")) +
+  theme_classic()
+                   
+```
+
+Here's that same figure again, but this time it's in the supplemental material.
+
+:::
 # References
