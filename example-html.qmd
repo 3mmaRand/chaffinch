@@ -14,6 +14,11 @@ crossref:
       key: suppfig
       reference-prefix: Figure S
       space-before-numbering: false
+    - kind: float
+      key: suppfile
+      reference-prefix: File S
+      space-before-numbering: false
+      caption-location: top
 bibliography: references.bib
 ---
 
@@ -30,19 +35,29 @@ options(digits = 2)
 
 # Introduction
 
-A number of [subspecies of the common chaffinch, *Fringilla coelebs*](https://en.wikipedia.org/wiki/Common_chaffinch), have been described based principally on the differences in the pattern and colour of the adult male plumage [@suárez2009]. Two of groups of these subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe and Asia and the "canariensis group" (@fig-canariensis) that occurs on the Canary Islands. 
+A number of [subspecies of the common chaffinch, *Fringilla
+coelebs*](https://en.wikipedia.org/wiki/Common_chaffinch), have been
+described based principally on the differences in the pattern and colour
+of the adult male plumage [@suárez2009]. Two of groups of these
+subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe
+and Asia and the "canariensis group" (@fig-canariensis) that occurs on
+the Canary Islands.
 
 ::: {#fig-subspecies layout-ncol="2"}
+![*F. c.
+coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
 
-![*F. c. coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
+![*F. c.
+palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#fig-canariensis}
 
-![*F. c. palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#fig-canariensis}
-
-Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons) and of the canariensis group on the right (H. Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons).
-
+Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas
+Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>,
+via Wikimedia Commons) and of the canariensis group on the right (H.
+Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via
+Wikimedia Commons).
 :::
 
-This study sought to determine whether the two subspecies differ in mass.
+This study sought to determine whether the two subspecies differ in mass. The raw data are in @suppfile-chaff.
 
 # Methods
 
@@ -82,7 +97,10 @@ lowest_se <- chaff_summary$se[chaff_summary$mean == lowest_mean]
 lowest_subspecies <- chaff_summary$subspecies[chaff_summary$mean == lowest_mean]
 ```
 
-We randomly sampled `r n_coelebs` *F. c. coelebs* males and `r n_canariensis` *F. c. palmae* males and determined their mass with spring scales. Analysis was carried out with R version 4.3.1 [@R-core] and tidyverse [@tidyverse] packages.
+We randomly sampled `r n_coelebs` *F. c. coelebs* males and
+`r n_canariensis` *F. c. palmae* males and determined their mass with
+spring scales. Analysis was carried out with R version 4.3.1 [@R-core]
+and tidyverse [@tidyverse] packages.
 
 ```{r}
 #| label: model
@@ -110,7 +128,11 @@ ggplot(mapping = aes(x = mod$residuals)) +
 
 # Results
 
-`r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$: `r highest_mean` $\pm$ `r highest_se` g) have significantly higher mass than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ = `r results$p.value[2]`). See @fig-chaff
+`r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$:
+`r highest_mean` $\pm$ `r highest_se` g) have significantly higher mass
+than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ =
+`r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ =
+`r results$p.value[2]`). See @fig-chaff
 
 ::: {#fig-chaff}
 ```{r}
@@ -142,13 +164,16 @@ ggplot() +
 **Canariensis chaffinches are heavier than Coelebs chaffinches**. The
 mean mass of 20 randomly sampled males from each subspecies was
 determined. Error bars are $\pm$ 1 standard error. Canariensis
-chaffinches were significantly heavier than Coelebs
-($t$ = `r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; 
-$p$ = `r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
+chaffinches were significantly heavier than Coelebs ($t$ =
+`r abs(results$statistic[2])`; $d.f.$ = `r mod$df.residual`; $p$ =
+`r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
 tidyverse packages [@tidyverse].
 :::
 
-There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures. The same figure is in "Supplemental Figures". See @suppfig-chaff-dist2
+There is another figure showing the distribution of the data in
+@fig-chaff-dist presented here only to demonstrate the auto numbering of
+figures. The same figure is in "Supplemental Figures". See
+@suppfig-chaff-dist2
 
 ```{r}
 #| label: fig-chaff-dist
@@ -171,8 +196,8 @@ ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
                    
 ```
 
-
-These results are gratuitously reproduced in @tbl-chaff just to include a table.
+These results are gratuitously reproduced in @tbl-chaff just to include
+a table.
 
 ```{r}
 #| label: tbl-chaff
@@ -190,8 +215,6 @@ Here we pick up points from the introduction.
 # Supplemental Figures
 
 ::: {#suppfig-chaff-dist2}
-
-
 ```{r}
 ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
   geom_density(alpha = 0.4) +
@@ -208,7 +231,19 @@ ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
                    
 ```
 
-Here's that same figure again, but this time it's in the supplemental material.
+Here's that same figure again, but this time it's in the supplemental
+material.
+:::
+
+::: {#suppfile-chaff}
+
+[chaff.txt](data/chaff.txt) 
+
 
 :::
+
+
+
+
+
 # References
