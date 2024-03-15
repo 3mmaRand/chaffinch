@@ -228,7 +228,7 @@ ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
                       labels = c("Canariensis", 
                                  "Coelebs")) +
   theme_classic()
-                   
+               
 ```
 
 Here's that same figure again, but this time it's in the supplemental
@@ -237,7 +237,7 @@ material.
 
 ::: {#suppfile-chaff}
 
-[chaff.txt](data/chaff.txt) 
+[chaff.txt](data-raw/chaff.txt) 
 
 
 :::
