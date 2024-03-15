@@ -17,6 +17,19 @@ execute:
   error: false
   message: false
   warning: false
+crossref:
+  custom:
+    - kind: float
+      key: suppfig
+      latex-env: suppfig
+      reference-prefix: Figure S
+      space-before-numbering: false
+    - kind: float
+      key: suppfile
+      latex-env: suppfile
+      reference-prefix: File S
+      space-before-numbering: false
+      caption-location: top
 bibliography: references.bib
 ---
 
@@ -45,7 +58,8 @@ Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas Trepte,
 
 :::
 
-This study sought to determine whether the two subspecies differ in mass.
+This study sought to determine whether the two subspecies differ in mass. The raw data are in @suppfile-chaff.
+
 
 # Methods
 
@@ -151,7 +165,10 @@ $p$ = `r results$p.value[2]`). Data analysis was conducted in R [@R-core] with
 tidyverse packages [@tidyverse].
 :::
 
-There is another figure showing the distribution of the data in @fig-chaff-dist presented here only to demonstrate the auto numbering of figures.
+There is another figure showing the distribution of the data in
+@fig-chaff-dist presented here only to demonstrate the auto numbering of
+figures. The same figure is in "Supplemental Figures". See
+@suppfig-chaff-dist2
 
 ```{r}
 #| label: fig-chaff-dist
@@ -188,5 +205,37 @@ chaff_summary |>
 # Discussion
 
 Here we pick up points from the introduction.
+
+
+# Supplemental Figures
+
+::: {#suppfig-chaff-dist2}
+```{r}
+ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
+  geom_density(alpha = 0.4) +
+    scale_y_continuous(name = "Density",
+                     limits = c(0, 0.2),
+                     expand = c(0, 0)) +
+  scale_x_continuous(name = "Mass (g)",
+                     limits = c(10, 30),
+                     expand = c(0, 0)) +
+  scale_fill_viridis_d(name = "Subspecies",
+                      labels = c("Canariensis", 
+                                 "Coelebs")) +
+  theme_classic()
+               
+```
+
+Here's that same figure again, but this time it's in the supplemental
+material.
+:::
+
+::: {#suppfile-chaff}
+
+[chaff.txt](data-raw/chaff.txt) 
+
+
+:::
+
 
 # References
