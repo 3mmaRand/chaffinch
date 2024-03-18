@@ -212,6 +212,12 @@ chaff_summary |>
 
 Here we pick up points from the introduction.
 
+### References
+
+::: {#refs}
+:::
+
+
 # Supplemental Figures
 
 ::: {#suppfig-chaff-dist2}
@@ -242,8 +248,3 @@ material.
 
 :::
 
-
-
-
-
-# References
