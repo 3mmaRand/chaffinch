@@ -208,6 +208,42 @@ chaff_summary |>
 
 ```
 
+
+I have created a mutli-column figure with mixed content. Take a look at @fig-mixedcontent. You can see two histograms in @fig-hist and @fig-hist2. There is also a photo of a chaffinch in @fig-coelebs2.
+
+
+::: {#fig-mixedcontent layout-ncol=2}
+
+```{r}
+#| label: fig-hist
+hist(rnorm(100), title = "just some histogram")
+```
+```{r}
+#| label: fig-hist2
+hist(rnorm(200), title = "another histogram")
+
+```
+
+![*F. c.
+coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs2}
+
+
+```{r}
+#| label: fig-table
+chaff_summary |> 
+  mutate(subspecies = str_to_sentence(subspecies)) |> 
+  knitr::kable(caption = "Summary of mass(g) for the two subspecies of chaffinch.",
+               col.names = names(chaff_summary) |> str_to_sentence())
+
+```
+
+
+
+
+A figure with a some plots and a photo. There's even a table in there although, IMO tables should not be in figures, but placed separately. I had to use the fig- prefix in the label to get make it be treated like a figure with caption below etc.
+
+:::
+
 # Discussion
 
 Here we pick up points from the introduction.
