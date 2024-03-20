@@ -41,9 +41,9 @@ described based principally on the differences in the pattern and colour
 of the adult male plumage [@suárez2009]. Two of groups of these
 subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe
 and Asia and the "canariensis group" (@fig-canariensis) that occurs on
-the Canary Islands.
+the Canary Islands. Or in Supplementary @suppfig-subspecies2!
 
-::: {#fig-subspecies layout-ncol="2"}
+::: {#fig-subspecies layout-ncol=2}
 ![*F. c.
 coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
 
@@ -218,7 +218,18 @@ Here we pick up points from the introduction.
 :::
 
 
-# Supplemental Figures
+# Supplemental 
+
+
+## Files
+
+::: {#suppfile-chaff}
+
+[chaff.txt](data-raw/chaff.txt) 
+
+:::
+
+##
 
 ::: {#suppfig-chaff-dist2}
 ```{r}
@@ -241,10 +252,17 @@ Here's that same figure again, but this time it's in the supplemental
 material.
 :::
 
-::: {#suppfile-chaff}
 
-[chaff.txt](data-raw/chaff.txt) 
+::: {#suppfig-subspecies2 layout-ncol=2}
+![*F. c.
+coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#suppfig-coelebs2}
 
+![*F. c.
+palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#suppfig-canariensis2}
 
+Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas
+Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>,
+via Wikimedia Commons) and of the canariensis group on the right (H.
+Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via
+Wikimedia Commons).
 :::
-
