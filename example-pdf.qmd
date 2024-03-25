@@ -212,11 +212,20 @@ I have created a mutli-column figure with mixed content. Take a look at @fig-mix
 
 ```{r}
 #| label: fig-hist
-hist(rnorm(100), title = "just some histogram")
+chaff |> 
+  filter(subspecies == "canariensis") |>
+  ggplot(aes(x = mass)) +
+  geom_density() +
+  theme_minimal()
 ```
+
 ```{r}
 #| label: fig-hist2
-hist(rnorm(200), title = "another histogram")
+chaff |> 
+  filter(subspecies == "coelebs") |>
+  ggplot(aes(x = mass)) +
+  geom_density() +
+  theme_minimal()
 
 ```
 
@@ -226,6 +235,10 @@ coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs2}
 
 ```{r}
 #| label: fig-table
+
+# notice that this is a table but I had to use the fig- prefix 
+# to get it to be treated like a figure rather than the tbl- prefix
+
 chaff_summary |> 
   mutate(subspecies = str_to_sentence(subspecies)) |> 
   knitr::kable(caption = "Summary of mass(g) for the two subspecies of chaffinch.",
