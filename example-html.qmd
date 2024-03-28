@@ -1,5 +1,5 @@
 ---
-title: "Example"
+title: "The difference in mass between subspecies of common chaffinch, *Fringilla coelebs*"
 author: "Emma Rand"
 engine: knitr
 execute:
@@ -43,7 +43,7 @@ subspecies are the "coelebs group" (@fig-coelebs) that occurs in Europe
 and Asia and the "canariensis group" (@fig-canariensis) that occurs on
 the Canary Islands. Or in Supplementary @suppfig-subspecies2!
 
-::: {#fig-subspecies layout-ncol=2}
+::: {#fig-subspecies layout-ncol="2"}
 ![*F. c.
 coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs}
 
@@ -57,7 +57,8 @@ Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via
 Wikimedia Commons).
 :::
 
-This study sought to determine whether the two subspecies differ in mass. The raw data are in @suppfile-chaff.
+This study sought to determine whether the two subspecies differ in
+mass. The raw data are in @suppfile-chaff.
 
 # Methods
 
@@ -136,7 +137,6 @@ than `r lowest_subspecies` (`r lowest_mean` $\pm$ `r lowest_se` g)($t$ =
 
 ::: {#fig-chaff}
 ```{r}
-#| code-fold: true
 
 ggplot() +
   geom_point(data = chaff, aes(x = subspecies, y = mass),
@@ -208,12 +208,11 @@ chaff_summary |>
 
 ```
 
+I have created a mutli-column figure with mixed content. Take a look at
+@fig-mixedcontent. You can see two histograms in @fig-hist and
+@fig-hist2. There is also a photo of a chaffinch in @fig-coelebs2.
 
-I have created a mutli-column figure with mixed content. Take a look at @fig-mixedcontent. You can see two histograms in @fig-hist and @fig-hist2. There is also a photo of a chaffinch in @fig-coelebs2.
-
-
-::: {#fig-mixedcontent layout-ncol=2}
-
+::: {#fig-mixedcontent layout-ncol="2"}
 ```{r}
 #| label: fig-hist
 chaff |> 
@@ -236,7 +235,6 @@ chaff |>
 ![*F. c.
 coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#fig-coelebs2}
 
-
 ```{r}
 #| label: fig-table
 
@@ -250,11 +248,10 @@ chaff_summary |>
 
 ```
 
-
-
-
-A figure with a some plots and a photo. There's even a table in there although, IMO tables should not be in figures, but placed separately. I had to use the fig- prefix in the label to get make it be treated like a figure with caption below etc.
-
+A figure with a some plots and a photo. There's even a table in there
+although, IMO tables should not be in figures, but placed separately. I
+had to use the fig- prefix in the label to get make it be treated like a
+figure with caption below etc.
 :::
 
 # Discussion
@@ -266,19 +263,22 @@ Here we pick up points from the introduction.
 ::: {#refs}
 :::
 
-
-# Supplemental 
-
+# Supplemental
 
 ## Files
 
 ::: {#suppfile-chaff}
-
-[chaff.txt](data-raw/chaff.txt) 
-
+[chaff.txt](data-raw/chaff.txt)
 :::
 
-##
+
+::: {#suppfile-pdfreport}
+[example-pdf.pdf](example-pdf.pdf)
+:::
+
+
+
+## 
 
 ::: {#suppfig-chaff-dist2}
 ```{r}
@@ -301,8 +301,7 @@ Here's that same figure again, but this time it's in the supplemental
 material.
 :::
 
-
-::: {#suppfig-subspecies2 layout-ncol=2}
+::: {#suppfig-subspecies2 layout-ncol="2"}
 ![*F. c.
 coelebs*](images/512px-Chaffinch_(Fringilla_coelebs).jpg){#suppfig-coelebs2}
 

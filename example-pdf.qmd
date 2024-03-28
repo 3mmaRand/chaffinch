@@ -1,5 +1,5 @@
 ---
-title: "Example"
+title: "The difference in mass between subspecies of common chaffinch, *Fringilla coelebs*"
 author: "Emma Rand"
 format:
   pdf:
@@ -281,6 +281,14 @@ Here we pick up points from the introduction.
 [chaff.txt](data-raw/chaff.txt) 
 
 :::
+
+
+
+::: {#suppfile-pdfreport}
+[example-pdf.pdf](example-pdf.pdf)
+:::
+
+
 
 ## Figures
 
