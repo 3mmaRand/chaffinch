@@ -262,6 +262,12 @@ A figure with a some plots and a photo. There's even a table in there although, 
 
 Here we pick up points from the introduction.
 
+```{r}
+wc <- wordcountaddin::word_count("example-html.qmd")
+```
+
+Word count: `r wc` words.
+
 # References
 
 ::: {#refs}
