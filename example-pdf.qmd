@@ -32,6 +32,7 @@ crossref:
       space-before-numbering: false
       caption-location: top
 bibliography: references.bib
+csl: cell.csl
 ---
 
 ```{r}
