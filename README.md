@@ -1,3 +1,6 @@
+This Project is a demo for writing a report in quarto. It does not have a good readme.
+
+
 # chaffinch
 [html Output](https://3mmarand.github.io/chaffinch/example-html.html)
 

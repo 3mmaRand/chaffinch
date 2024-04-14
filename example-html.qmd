@@ -257,6 +257,11 @@ figure with caption below etc.
 # Discussion
 
 Here we pick up points from the introduction.
+```{r}
+wc <- wordcountaddin::word_count("example-html.qmd")
+```
+
+Word count: `r wc` words.
 
 ### References
 
