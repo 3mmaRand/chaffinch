@@ -127,6 +127,23 @@ ggplot(mapping = aes(x = mod$residuals)) +
 
 ```
 
+In the results section [@tbl-chaff] is generated from a code chunk by passing a data frame to the `kable` function from the `knitr` package. But [@tbl-primers] is a "markdown table" that is written directly in the document.
+
+
+::: {#tbl-primers}
+| Gene    | Forward Primer            | Reverse Primer          | Product size (bp) |
+|----------------|----------------------|--------------------|----------------|
+| Tbx6.L  | CCAGATGGGCCACATCATCCT     | ATTAGAGGCTCCAGGCCCC     | 975               |
+| GAPDH.L | CACAGACTTACACAGGGGTTG     | TCGCCCCACTTAATGTTGCT    | 307               |
+| Cdx4.L  | AATCGACTTCTACAGGCAAGAC    | ACAGAACACAGCCACAAACTG   | 244               |
+| ODC.L   | GCAAAGTGGATCTGATGATGAAGAA | CTGGCAAAACACAAGCTACAAAT | 735               |
+
+: Primer sequences used in the RT-PCR experiments. This has nothing to do with chaffinches at all. It was just a table I could copy in from elsewhere.
+
+:::
+
+
+
 # Results
 
 `r str_to_sentence(highest_subspecies)` ($\bar{x} \pm s.e.$:
