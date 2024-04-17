@@ -20,6 +20,7 @@ execute:
   message: false
   warning: false
 crossref:
+  fig-title: '**Figure**'
   custom:
     - kind: float
       key: suppfig
@@ -58,7 +59,7 @@ A number of [subspecies of the common chaffinch, *Fringilla coelebs*](https://en
 
 ![*F. c. palmae*](images/512px-Fringilla_coelebs_palmae_-_Los_Tilos.jpg){#fig-canariensis}
 
-Adult male *Fringilla coelebs* of the coelebs group on the left (Andreas Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons) and of the canariensis group on the right (H. Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons).
+**Adult male *Fringilla coelebs*. ** Coelebs group on the left (Andreas Trepte, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons) and canariensis group on the right (H. Zell, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons).
 
 :::
 
@@ -334,7 +335,7 @@ ggplot(data = chaff, aes(x = mass, fill = subspecies)) +
                
 ```
 
-Here's that same figure again, but this time it's in the supplemental
+**Here's that same figure again**. but this time it's in the supplemental
 material.
 :::
 
