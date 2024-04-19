@@ -12,6 +12,9 @@ format:
       - top=20mm
       - left=25mm
       - right=25mm
+    include-in-header:
+      text: |
+       \usepackage[font=small,labelfont={bf,small}]{caption}
 engine: knitr
 execute:
   echo: false
