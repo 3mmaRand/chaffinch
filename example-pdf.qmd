@@ -2,7 +2,8 @@
 title: "The difference in mass between subspecies of common chaffinch, *Fringilla coelebs*"
 author: "Emma Rand"
 format:
-  pdf:
+  titlepage-pdf:
+    titlepage: plain
     documentclass: article
     fig-pos: 'H'
     papersize: A4
